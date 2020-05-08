@@ -1,7 +1,17 @@
 import Head from "next/head";
-import { Button, Flex, Text, Box } from "@chakra-ui/core";
+import {
+  Button,
+  Flex,
+  Image,
+  Heading,
+  Text,
+  Box,
+  Link,
+  Divider,
+} from "@chakra-ui/core";
 
 import { Container } from "../components/container";
+import { Column } from "../components/column";
 
 import { useColorMode } from "@chakra-ui/core";
 
@@ -9,19 +19,29 @@ export default function Home() {
   const { colorMode, toggleColorMode } = useColorMode();
 
   return (
-    <Container>
-      <Box width="100%">
-        <Head>
-          <title>Create Next App</title>
-          <link rel="icon" href="/favicon.ico" />
-        </Head>
-        <Flex as="nav" align="center">
-          <Button onClick={toggleColorMode}>
-            Toggle {colorMode === "light" ? "Dark" : "Light"}
-          </Button>
-        </Flex>
-        <Text>Wassup</Text>
-      </Box>
-    </Container>
+    <>
+      <Container>
+        <Column>
+          <Heading>David's Dank Blog</Heading>
+          <text>
+            Hi there! Welcome to my dank ass blog. There’s some cool stuff here
+            but like, i dunno what else I would put here.
+          </text>
+          <Box>
+            <Button onClick={toggleColorMode}>
+              Toggle {colorMode === "light" ? "Dark" : "Light"}
+            </Button>
+          </Box>
+        </Column>
+        <Divider />
+        <Column>
+          <Heading>David's Dank Blog</Heading>
+          <text>
+            Hi there! Welcome to my dank ass blog. There’s some cool stuff here
+            but like, i dunno what else I would put here.
+          </text>
+        </Column>
+      </Container>
+    </>
   );
 }

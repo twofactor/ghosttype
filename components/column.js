@@ -1,17 +1,19 @@
 import React from "react";
-import { Flex, Box, useColorMode } from "@chakra-ui/core";
+import { Flex, useColorMode } from "@chakra-ui/core";
 
-export const Container = (props) => {
+export const Column = (props) => {
   const { colorMode } = useColorMode();
 
   const bgColor = { light: "gray.50", dark: "gray.900" };
 
   const color = { light: "black", dark: "white" };
   return (
-    <Box
-      minHeight="100vh"
-      bg={bgColor[colorMode]}
-      color={color[colorMode]}
+    <Flex
+      width="100%"
+      maxWidth="660px"
+      direction="column"
+      alignItems="left"
+      margin="auto"
       {...props}
     />
   );

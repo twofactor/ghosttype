@@ -1,6 +1,8 @@
 import App from "next/app";
 import { ThemeProvider, ColorModeProvider, CSSReset } from "@chakra-ui/core";
 
+import "react-quill/dist/quill.bubble.css";
+
 function GhostApp({ Component, pageProps }) {
   return (
     <ThemeProvider>

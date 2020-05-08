@@ -1,12 +1,13 @@
 import Head from "next/head";
+import { useRouter } from "next/router";
 
 import { Button, Heading, Text, Box, Divider } from "@chakra-ui/core";
 import { useColorMode } from "@chakra-ui/core";
 
-import { Container } from "../components/container";
-import { Column } from "../components/column";
+import { Container } from "../../components/container";
+import { Column } from "../../components/column";
 
-import BlogPostPreview from "../components/blog/blogPostPreview";
+import BlogPostPreview from "../../components/blog/blogPostPreview";
 
 const posts = {
   posts: [
@@ -25,12 +26,15 @@ const posts = {
 
 export default function Home() {
   const { colorMode, toggleColorMode } = useColorMode();
+  const router = useRouter();
+
+  const { blog } = router.query;
 
   return (
     <>
       <Container>
         <Column>
-          <Heading>David's Dank Blog Editor</Heading>
+          <Heading>{blog}'s Dank Blog</Heading>
           <Text>
             Hi there! Welcome to my dank ass blog. There’s some cool stuff here
             but like, i dunno what else I would put here.
@@ -44,7 +48,7 @@ export default function Home() {
         <Divider />
         <Column>
           {posts.posts.map((post) => (
-            <BlogPostPreview post={post} user="David" />
+            <BlogPostPreview post={post} user={blog} />
           ))}
         </Column>
       </Container>

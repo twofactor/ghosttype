@@ -27,6 +27,8 @@ export default function Home() {
             Hi there! Welcome to my dank ass blog. There’s some cool stuff here
             but like, i dunno what else I would put here.
           </text>
+          <a href="/api/login">Login</a>
+          <a href="/api/logout">Logout</a>
           <Box>
             <Button onClick={toggleColorMode}>
               Toggle {colorMode === "light" ? "Dark" : "Light"}

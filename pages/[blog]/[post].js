@@ -1,6 +1,7 @@
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import fetch from "isomorphic-unfetch";
 
 import { Button, Heading, Text } from "@chakra-ui/core";
 
@@ -8,10 +9,6 @@ import { Container } from "../../components/container";
 import { Column } from "../../components/column";
 
 export default function BlogPost() {
-  const router = useRouter();
-
-  const { blog, post } = router.query;
-
   return (
     <>
       <Container>

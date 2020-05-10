@@ -7,12 +7,21 @@ export default (req, res) => {
   } = req;
 
   //Dummy data for testing
-  const samplePost = {
-    username: userposts,
-    date: "Tuesday, May 5th 2010",
-    contents: "<p>f</p><p><br></p><ul><li>d</li><li>* </li><li>d</li></ul>",
+  const samplePosts = {
+    posts: [
+      {
+        title: "what-minecraft-taught-me-about-life",
+        cleantitle: "What Minecraft Taught Me About Life",
+        date: "Tuesday, May 5th 2010",
+      },
+      {
+        title: "what-fortnite-taught-me-about-life",
+        cleantitle: "What Fortnite Taught Me About Life",
+        date: "Tuesday, May 5th 2010",
+      },
+    ],
   };
 
   res.statusCode = 200;
-  res.json(samplePost);
+  res.json(samplePosts);
 };

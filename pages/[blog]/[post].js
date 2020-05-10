@@ -12,16 +12,14 @@ export default function BlogPost() {
   return (
     <>
       <Container>
-        <Head>
-          <title>{post}</title>
-        </Head>
+        <Head>{/* <title>{post}</title> */}</Head>
         <Column>
-          <Link href={"/" + blog}>
+          {/* <Link href={"/" + blog}>
             <Button>Go Back</Button>
-          </Link>
-          <Heading>
+          </Link> */}
+          {/* <Heading>
             {blog}'s Dank Blog Post {post}
-          </Heading>
+          </Heading> */}
           <Text>
             Hi there! Welcome to my dank ass blog. There’s some cool stuff here
             but like, i dunno what else I would put here.

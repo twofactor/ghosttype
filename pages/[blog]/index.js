@@ -2,7 +2,7 @@ import Head from "next/head";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
 
-import { retrievePostsByUser } from "../../lib/faunadb";
+import { retrievePostsByUser, retrieveUserByUsername } from "../../lib/faunadb";
 
 import {
   Flex,
@@ -22,15 +22,23 @@ import SignInButton from "../../components/admin/signInButton";
 import BlogPostPreview from "../../components/blog/blogPostPreview";
 
 export async function getServerSideProps(context) {
-  const { blog } = context.params;
-  const posts = await retrievePostsByUser(blog);
+  try {
+    const { blog } = context.params;
+    const posts = await retrievePostsByUser(blog);
 
-  return {
-    props: { posts },
-  };
+    const user = await retrieveUserByUsername(blog);
+
+    return {
+      props: { posts: posts, user: user },
+    };
+  } catch (errror) {
+    return {
+      props: { posts: "no", user: "no" },
+    };
+  }
 }
 
-export default function BlogPosts({ posts }) {
+export default function BlogPosts({ posts, user }) {
   const { colorMode, toggleColorMode } = useColorMode();
   const router = useRouter();
 
@@ -49,12 +57,9 @@ export default function BlogPosts({ posts }) {
         <Column>
           <Box mt="100px" mb="36px">
             <Heading mb="12px" fontSize="4xl">
-              {blog}'s Dank Blog
+              {user.name}
             </Heading>
-            <Text fontSize="lg">
-              Hi there! Welcome to my dank ass blog. There’s some cool stuff
-              here but like, i dunno what else I would put here.
-            </Text>
+            <Text fontSize="lg">{user.description}</Text>
           </Box>
         </Column>
         <Divider />

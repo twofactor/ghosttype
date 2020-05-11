@@ -60,6 +60,23 @@ export default function Home() {
             newsletters, which feel too ephemeral and not timeless the way blog
             posts are.
           </Text>
+          <Text fontSize="lg" mb="36px">
+            You can check out some example blogs if you'd like as well. If you
+            want me to feature yours, just dm me on twitter{" "}
+            <Link target="_blank" href="https://twitter.com/ghosttyped">
+              @ghosttyped
+            </Link>
+            .
+          </Text>
+          <Link>
+            <Heading as="h2" mb="8px" fontStyle="bold" fontSize="2xl">
+              <NextLink href="/ghosttyped">@Ghosttyped's Blog</NextLink>
+            </Heading>
+          </Link>
+          <Text fontSize="lg">
+            David's personal blog, set up right here on this site!
+          </Text>
+          <Box height="40px" />
           <Text fontSize="lg" fontWeight="bold">
             Are there more features coming soon?
           </Text>
@@ -77,23 +94,6 @@ export default function Home() {
             where I can't afford to keep it up I'll have to charge or something.
             If you'd like to donate database/cloud credits to me let me know as
             well!
-          </Text>
-
-          <Text fontSize="lg" mb="36px">
-            You can check out some example blogs if you'd like as well. If you
-            want me to feature yours, just dm me on twitter{" "}
-            <Link target="_blank" href="https://twitter.com/ghosttyped">
-              @ghosttyped
-            </Link>
-            .
-          </Text>
-          <Link>
-            <Heading as="h2" mb="8px" fontStyle="bold" fontSize="2xl">
-              <NextLink href="/ghosttyped">@Ghosttyped's Blog</NextLink>
-            </Heading>
-          </Link>
-          <Text fontSize="lg">
-            David's personal blog, set up right here on this site!
           </Text>
           <Box height="200px" />
         </Column>

@@ -1,30 +1,36 @@
 import Head from "next/head";
+import NextLink from "next/link";
 import { useRouter } from "next/router";
 
-import { Button, Heading, Text, Box, Divider } from "@chakra-ui/core";
+import { retrievePostsByUser } from "../../lib/faunadb";
+
+import {
+  Flex,
+  Button,
+  Heading,
+  Text,
+  Box,
+  Divider,
+  Link,
+} from "@chakra-ui/core";
 import { useColorMode } from "@chakra-ui/core";
 
 import { Container } from "../../components/container";
 import { Column } from "../../components/column";
+import SignInButton from "../../components/admin/signInButton";
 
 import BlogPostPreview from "../../components/blog/blogPostPreview";
 
-const posts = {
-  posts: [
-    {
-      title: "What Minecraft Taught Me About Life",
-      date: "Today",
-      link: "test",
-    },
-    {
-      title: "What Fortnite Taught Me About Life",
-      date: "Yesterday",
-      link: "swag",
-    },
-  ],
-};
+export async function getServerSideProps(context) {
+  const { blog } = context.params;
+  const posts = await retrievePostsByUser(blog);
 
-export default function Home() {
+  return {
+    props: { posts },
+  };
+}
+
+export default function BlogPosts({ posts }) {
   const { colorMode, toggleColorMode } = useColorMode();
   const router = useRouter();
 
@@ -33,23 +39,32 @@ export default function Home() {
   return (
     <>
       <Container>
-        <Column>
-          <Heading>{blog}'s Dank Blog</Heading>
-          <Text>
-            Hi there! Welcome to my dank ass blog. There’s some cool stuff here
-            but like, i dunno what else I would put here.
-          </Text>
+        <Flex align="center">
+          <Flex align="flex-end" />
+          <Flex align="center" flexGrow="1" justify="center" />
           <Box>
-            <Button onClick={toggleColorMode}>
-              Toggle {colorMode === "light" ? "Dark" : "Light"}
-            </Button>
+            <SignInButton />
+          </Box>
+        </Flex>
+        <Column>
+          <Box mt="100px" mb="36px">
+            <Heading mb="12px" fontSize="4xl">
+              {blog}'s Dank Blog
+            </Heading>
+            <Text fontSize="lg">
+              Hi there! Welcome to my dank ass blog. There’s some cool stuff
+              here but like, i dunno what else I would put here.
+            </Text>
           </Box>
         </Column>
         <Divider />
         <Column>
-          {posts.posts.map((post) => (
-            <BlogPostPreview post={post} user={blog} />
-          ))}
+          <Box pt="48px">
+            {posts.map((post) => (
+              <BlogPostPreview post={post} user={blog} />
+            ))}
+          </Box>
+          <Box height="200px" />
         </Column>
       </Container>
     </>

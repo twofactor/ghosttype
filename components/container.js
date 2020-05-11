@@ -4,7 +4,7 @@ import { Flex, Box, useColorMode } from "@chakra-ui/core";
 export const Container = (props) => {
   const { colorMode } = useColorMode();
 
-  const bgColor = { light: "gray.50", dark: "gray.900" };
+  const bgColor = { light: "white", dark: "gray.900" };
 
   const color = { light: "black", dark: "white" };
   return (
@@ -12,6 +12,7 @@ export const Container = (props) => {
       minHeight="100vh"
       bg={bgColor[colorMode]}
       color={color[colorMode]}
+      padding="12px"
       {...props}
     />
   );

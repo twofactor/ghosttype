@@ -1,51 +1,53 @@
 import Head from "next/head";
 
-import { Button, Heading, Text, Box, Divider } from "@chakra-ui/core";
-import { useColorMode } from "@chakra-ui/core";
+import {
+  Button,
+  Flex,
+  Heading,
+  Text,
+  Box,
+  Divider,
+  Link,
+} from "@chakra-ui/core";
 
 import { Container } from "../components/container";
 import { Column } from "../components/column";
-
-import BlogPostPreview from "../components/blog/blogPostPreview";
-
-const posts = {
-  posts: [
-    {
-      title: "What Minecraft Taught Me About Life",
-      date: "Today",
-      link: "test",
-    },
-    {
-      title: "What Fortnite Taught Me About Life",
-      date: "Yesterday",
-      link: "swag",
-    },
-  ],
-};
+import SignInButton from "../components/admin/signInButton";
 
 export default function Home() {
-  const { colorMode, toggleColorMode } = useColorMode();
-
   return (
     <>
       <Container>
-        <Column>
-          <Heading>David's Dank Blog Editor</Heading>
-          <Text>
-            Hi there! Welcome to my dank ass blog. There’s some cool stuff here
-            but like, i dunno what else I would put here.
-          </Text>
+        <Flex align="center">
+          <Flex align="flex-end" />
+          <Flex align="center" flexGrow="1" justify="center" />
           <Box>
-            <Button onClick={toggleColorMode}>
-              Toggle {colorMode === "light" ? "Dark" : "Light"}
-            </Button>
+            <SignInButton />
+          </Box>
+        </Flex>
+        <Column>
+          <Box mt="100px" mb="24px">
+            <Heading mb="12px" fontSize="4xl">
+              Welcome to your admin panel
+            </Heading>
+            <Text fontSize="lg" mb="24px">
+              This is where you'll be able to see your articles and write them.
+              Unfortunately I haven't built this part yet. You can logout at
+              least though!
+            </Text>
+            <Link href="/api/logout">
+              <Button variant="outline" size="md" mb="12px">
+                <Text fontSize="md">Log Out</Text>
+              </Button>
+            </Link>
           </Box>
         </Column>
         <Divider />
         <Column>
-          {posts.posts.map((post) => (
-            <BlogPostPreview post={post} user="David" />
-          ))}
+          <Text mt="36px" fontSize="lg">
+            Coming soon lmao
+          </Text>
+          <Box height="200px" />
         </Column>
       </Container>
     </>

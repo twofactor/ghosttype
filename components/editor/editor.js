@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 import ReactQuill, { Quill } from "react-quill";
 import MarkdownShortcuts from "quill-markdown-shortcuts";

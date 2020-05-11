@@ -1,21 +1,41 @@
-//Global theme w/ Chakra UI
-export default Theme = {
-  breakpoints: ["30em", "48em", "62em", "80em"],
+import React from "react";
+import { theme as chakraTheme } from "@chakra-ui/core";
+
+const fonts = { ...chakraTheme.fonts, mono: `'Menlo', monospace` };
+
+const breakpoints = ["40em", "52em", "64em"];
+
+const theme = {
+  ...chakraTheme,
+  colors: {
+    ...chakraTheme.colors,
+  },
   fonts: {
-    heading: '"Avenir Next", sans-serif',
-    body: "system-ui, sans-serif",
+    body: "Inter, sans-serif",
+    heading: "Inter, sans-serif",
     mono: "Menlo, monospace",
   },
   fontSizes: {
-    xs: "0.75rem",
-    sm: "0.875rem",
-    md: "1rem",
-    lg: "1.125rem",
-    xl: "1.25rem",
-    "2xl": "1.5rem",
-    "3xl": "1.875rem",
-    "4xl": "2.25rem",
-    "5xl": "3rem",
-    "6xl": "4rem",
+    xs: "12px",
+    sm: "14px",
+    md: "16px",
+    lg: "18px",
+    xl: "20px",
+    "2xl": "24px",
+    "3xl": "28px",
+    "4xl": "36px",
+    "5xl": "48px",
+    "6xl": "64px",
+  },
+  fontWeights: {
+    normal: 400,
+    medium: 500,
+    bold: 700,
+  },
+  breakpoints,
+  icons: {
+    ...chakraTheme.icons,
   },
 };
+
+export default theme;

@@ -1,5 +1,5 @@
 import { Heading, Text, Box } from "@chakra-ui/core";
-import { Link as UILink } from "@chakra-ui/core";
+import { Link } from "@chakra-ui/core";
 import NextLink from "next/link";
 
 export default function BlogPostPreview({ post, user }) {
@@ -11,13 +11,13 @@ export default function BlogPostPreview({ post, user }) {
     }
     */
   return (
-    <Box>
-      <UILink>
-        <NextLink href={user + "/" + post.link}>
-          <Heading>{post.title}</Heading>
-        </NextLink>
-      </UILink>
-      <Text>{post.date}</Text>
+    <Box mb="36px">
+      <Link>
+        <Heading as="h2" mb="8px" fontStyle="bold" fontSize="2xl">
+          <NextLink href={user + "/" + post.titleurl}>{post.title}</NextLink>
+        </Heading>
+      </Link>
+      <Text fontSize="lg">{post.date}</Text>
     </Box>
   );
 }

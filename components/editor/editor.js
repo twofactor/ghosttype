@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import ReactQuill, { Quill } from "react-quill";
 import MarkdownShortcuts from "quill-markdown-shortcuts";
@@ -10,8 +10,8 @@ const modules = {
   markdownShortcuts: {},
 };
 
-const Editor = ({}) => {
-  const [contents, setContents] = useState("");
+const Editor = ({ initialvalue }) => {
+  const [contents, setContents] = useState(initialvalue);
 
   return (
     <ReactQuill

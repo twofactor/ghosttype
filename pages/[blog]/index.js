@@ -18,31 +18,38 @@ import { useColorMode } from "@chakra-ui/core";
 import { Container } from "../../components/container";
 import { Column } from "../../components/column";
 import SignInButton from "../../components/admin/signInButton";
+import NoPost from "../../components/blog/nopost";
 
 import BlogPostPreview from "../../components/blog/blogPostPreview";
 
 export async function getServerSideProps(context) {
-  try {
-    const { blog } = context.params;
-    const posts = await retrievePostsByUser(blog);
+  const { blog } = context.params;
+  const posts = await retrievePostsByUser(blog);
 
-    const user = await retrieveUserByUsername(blog);
+  const user = await retrieveUserByUsername(blog);
 
+  if (typeof user === "undefined" || typeof posts === undefined) {
     return {
-      props: { posts: posts, user: user },
-    };
-  } catch (errror) {
-    return {
-      props: { posts: "no", user: "no" },
+      props: { posts: "", user: "" },
     };
   }
+
+  return {
+    props: { posts: posts, user: user },
+  };
 }
 
 export default function BlogPosts({ posts, user }) {
-  const { colorMode, toggleColorMode } = useColorMode();
-  const router = useRouter();
-
-  const { blog } = router.query;
+  if (posts === "" && user === "") {
+    return (
+      <Container>
+        <Column>
+          <Heading>404: This page doesn't exist</Heading>
+          <NoPost />
+        </Column>
+      </Container>
+    );
+  }
 
   return (
     <>
@@ -66,7 +73,7 @@ export default function BlogPosts({ posts, user }) {
         <Column>
           <Box pt="48px">
             {posts.map((post) => (
-              <BlogPostPreview post={post} user={blog} />
+              <BlogPostPreview post={post} user={user.screen_name} />
             ))}
           </Box>
           <Box height="200px" />

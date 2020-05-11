@@ -7,10 +7,17 @@ import { Button, Heading, Text, Flex, Box, Divider } from "@chakra-ui/core";
 import { Container } from "../../../components/container";
 import { Column } from "../../../components/column";
 import SignInButton from "../../../components/admin/signInButton";
+import NoPost from "../../../components/blog/nopost";
 
 export async function getServerSideProps(context) {
   let { blog, post } = context.params;
   const postdata = await retrievePostByUserAndTitle(blog, post);
+
+  if (typeof postdata === "undefined") {
+    return {
+      props: { postdata: "" },
+    };
+  }
 
   return {
     props: { postdata },
@@ -18,6 +25,15 @@ export async function getServerSideProps(context) {
 }
 
 export default function BlogPost({ postdata }) {
+  if (postdata === "") {
+    return (
+      <Container>
+        <Column>
+          <NoPost />
+        </Column>
+      </Container>
+    );
+  }
   return (
     <Container>
       <Head>

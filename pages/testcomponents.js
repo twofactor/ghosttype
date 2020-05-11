@@ -14,6 +14,7 @@ import { Container } from "../components/container";
 import { Column } from "../components/column";
 
 import SignInButton from "../components/admin/signInButton";
+import NoPost from "../components/blog/nopost";
 
 import { useColorMode } from "@chakra-ui/core";
 
@@ -33,6 +34,8 @@ export default function Home() {
         <Column>
           <Heading>The Sign In Button</Heading>
           <SignInButton />
+          <Heading>No Obama</Heading>
+          <NoPost />
         </Column>
       </Container>
     </>

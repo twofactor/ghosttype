@@ -1,10 +1,14 @@
-.blogpostcontents p {
+.blogpostcontents p,
+.blogpostcontents li,
+.ql-editor p,
+.ql-editor li {
   font-family: "Inter", sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 18px;
   line-height: 160%;
   margin-bottom: 8px;
+  color: #000;
 }
 
 .blogpostcontents li {
@@ -15,11 +19,33 @@
   line-height: 160%;
 }
 
-.blogpostcontents h2 {
+.blogpostcontents h2,
+.ql-editor h2 {
   font-family: "Inter", sans-serif;
   font-style: normal;
   font-weight: bold;
-  font-size: 24px;
-  line-height: 36px;
+  font-size: 24px !important;
+  line-height: 40px;
   color: #000000;
+}
+
+.ql-editor {
+  max-width: 690px;
+  min-height: 80vh;
+  margin: auto;
+  padding-bottom: 20vh;
+}
+
+.ql-editor ul,
+.ql-editor ol {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.ql-editor ol li,
+.ql-editor ul li {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
 }

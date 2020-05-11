@@ -19,7 +19,7 @@ export async function getServerSideProps(context) {
 export default function EditPost({ postdata }) {
   return (
     <>
-      <DynamicEditor initialvalue={postdata.postContents} />
+      <DynamicEditor postdata={postdata} />
     </>
   );
 }

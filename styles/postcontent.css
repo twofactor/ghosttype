@@ -19,6 +19,16 @@
   line-height: 160%;
 }
 
+.blogpostcontents h1,
+.ql-editor h1 {
+  font-family: "Inter", sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 32px !important;
+  line-height: 48px;
+  color: #000000;
+}
+
 .blogpostcontents h2,
 .ql-editor h2 {
   font-family: "Inter", sans-serif;

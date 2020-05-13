@@ -114,13 +114,30 @@ export default function BlogPosts({ posts, user }) {
         <Divider />
         <Column>
           <Box pt="48px">
-            {posts.map((post) => (
-              <BlogPostPreview
-                key={user.screename + post.titleurl}
-                post={post}
-                user={user.screen_name}
-              />
-            ))}
+            {posts.length === 0 ? (
+              <Box>
+                <Heading as="h2" mb="8px" fontStyle="bold" fontSize="2xl">
+                  This blog has no published posts yet.
+                </Heading>
+                <Text fontSize="lg" mb="12px">
+                  Come back another time! In the mean time, why not make some
+                  posts of your own!
+                </Text>
+                <Link href="/api/login">
+                  <Button size="md" variant="outline">
+                    <Text fontSize="md">Sign Up/Sign In to Ghosttype</Text>
+                  </Button>
+                </Link>
+              </Box>
+            ) : (
+              posts.map((post) => (
+                <BlogPostPreview
+                  key={user.screen_name + post.titleurl}
+                  post={post}
+                  user={user.screen_name}
+                />
+              ))
+            )}
           </Box>
           <Box height="240px" />
 

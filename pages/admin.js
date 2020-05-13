@@ -94,7 +94,7 @@ export default function Home({ user, posts }) {
           <Flex align="flex-end" />
           <Flex align="center" flexGrow="1" justify="center" />
           <Box>
-            <SignInButton />
+            <span />
           </Box>
         </Flex>
         <Column>

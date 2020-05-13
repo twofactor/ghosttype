@@ -39,6 +39,17 @@ export default function BlogPost({ postdata }) {
     <Container>
       <Head>
         <title>{postdata.title}</title>
+        <meta property="og:title" content={postdata.title} />
+        <meta
+          property="og:description"
+          content={"An article by " + postdata.username}
+        />
+        <meta
+          property="og:image"
+          content="https://www.ghosttype.app/ghosttype_meta_cover.png"
+        />
+        <meta name="twitter:card" content="summary" />
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <Flex align="center">
         <Flex align="flex-end">

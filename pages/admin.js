@@ -73,6 +73,22 @@ export default function Home({ user, posts }) {
 
   return (
     <>
+      <Head>
+        <title>My Posts</title>
+        <meta property="og:title" content="Ghosttype" />
+        <meta
+          property="og:description"
+          content="A minimalist blogging platform."
+        />
+        <meta
+          property="og:image"
+          content="https://www.ghosttype.app/ghosttype_meta_cover.png"
+        />
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        <meta property="og:url" content="https://www.ghosttype.app" />
+        <meta name="twitter:card" content="summary" />
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
       <Container>
         <Flex align="center">
           <Flex align="flex-end" />

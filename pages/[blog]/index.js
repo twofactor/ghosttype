@@ -62,6 +62,20 @@ export default function BlogPosts({ posts, user }) {
 
   return (
     <>
+      <Head>
+        <title>{user.name}</title>
+        <meta property="og:title" content="Ghosttype" />
+        <meta
+          property="og:description"
+          content={user.screen_name + "'/s blog."}
+        />
+        <meta
+          property="og:image"
+          content="https://www.ghosttype.app/ghosttype_meta_cover.png"
+        />
+        <meta name="twitter:card" content="summary" />
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
       <Container>
         <Flex align="center">
           <Flex align="flex-end" />
@@ -101,10 +115,22 @@ export default function BlogPosts({ posts, user }) {
         <Column>
           <Box pt="48px">
             {posts.map((post) => (
-              <BlogPostPreview post={post} user={user.screen_name} />
+              <BlogPostPreview
+                key={user.screename + post.titleurl}
+                post={post}
+                user={user.screen_name}
+              />
             ))}
           </Box>
-          <Box height="200px" />
+          <Box height="240px" />
+
+          <NextLink href="/">
+            <Link>
+              <Text fontWeight="bold">Powered by Ghosttype</Text>
+            </Link>
+          </NextLink>
+
+          <Box height="48px" />
         </Column>
       </Container>
     </>

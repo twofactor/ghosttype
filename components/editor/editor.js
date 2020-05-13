@@ -262,9 +262,6 @@ const Editor = ({ postdata, username, post }) => {
         </ModalContent>
       </Modal>
       <Container>
-        <Head>
-          <title>{postdata.title}</title>
-        </Head>
         <Flex align="center">
           <Flex align="flex-end">
             <Button onClick={saveAndGoBack} size="sm" variant="outline">

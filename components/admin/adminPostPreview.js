@@ -8,7 +8,7 @@ export default function AdminPostPreview({ post, user, published }) {
         title:
         date:
         link:
-    }
+    } 
     */
   return (
     <Box mb="36px">

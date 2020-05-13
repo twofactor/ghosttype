@@ -22,6 +22,22 @@ export default function Home() {
 
   return (
     <>
+      <Head>
+        <title>Ghosttype: A Minimalist Blogging Platform</title>
+        <meta property="og:title" content="Ghosttype" />
+        <meta
+          property="og:description"
+          content="A minimalist blogging platform."
+        />
+        <meta
+          property="og:image"
+          content="https://www.ghosttype.app/ghosttype_meta_cover.png"
+        />
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        <meta property="og:url" content="https://www.ghosttype.app" />
+        <meta name="twitter:card" content="summary" />
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
       <Container>
         <Flex align="center">
           <Flex align="flex-end"></Flex>
@@ -32,7 +48,7 @@ export default function Home() {
         </Flex>
         <Column>
           <Heading mt="100px" mb="4px" fontSize="4xl">
-            Ghosttype is a stupidly simple blogging platform
+            Ghosttype is a minimalist blogging platform
           </Heading>
           <Text fontSize="lg" mb="12px">
             Create a minimal, barebones style blog in seconds. You know, like
@@ -63,7 +79,11 @@ export default function Home() {
           <Text fontSize="lg" mb="24px">
             You can check out some example blogs if you'd like as well. If you
             want me to feature yours, just dm me on twitter
-            <Link target="_blank" href="https://twitter.com/ghosttyped">
+            <Link
+              target="_blank"
+              ml="4px"
+              href="https://twitter.com/ghosttyped"
+            >
               @ghosttyped
             </Link>
             .
@@ -98,23 +118,6 @@ export default function Home() {
             where I can't afford to keep it up I'll have to charge or something.
             If you'd like to donate database/cloud credits to me let me know as
             well!
-          </Text>
-          <Text fontSize="lg" fontWeight="bold">
-            Is there any relationship to Ghost?
-          </Text>
-          <Text fontSize="lg" mb="12px">
-            No lmao. No relation at all. I named this app after my twitter
-            handle, which has been historically either "ghosttype" with some
-            form of underscore or "ghosttyped." The name is a bit inconvienent
-            but I'm not going to change my domain because I found out that
-            something else exists especially since I'm broke right now.
-          </Text>
-          <Text fontSize="lg" fontWeight="bold">
-            Broke?
-          </Text>
-          <Text fontSize="lg" mb="12px">
-            If you wanna help fix that, I'm avaliable for hire if you're looking
-            for a software engineer in San Francisco.
           </Text>
           <Box height="200px" />
         </Column>

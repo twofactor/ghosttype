@@ -1,3 +1,4 @@
+import Head from "next/head";
 import dynamic from "next/dynamic";
 import Router from "next/router";
 import auth0 from "../../../lib/auth0";
@@ -57,6 +58,10 @@ export default function EditPost({ postdata, blog, post }) {
 
   return (
     <>
+      <Head>
+        <title>Edit Post</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
       <DynamicEditor postdata={postdata} username={blog} post={post} />
     </>
   );

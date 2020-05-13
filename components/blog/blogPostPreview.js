@@ -13,11 +13,13 @@ export default function BlogPostPreview({ post, user }) {
     */
   return (
     <Box mb="36px">
-      <Heading as="h2" mb="8px" fontStyle="bold" fontSize="2xl">
-        <NextLink href={"/" + user + "/" + post.titleurl}>
-          <Link>{post.title}</Link>
-        </NextLink>
-      </Heading>
+      <Link>
+        <Heading as="h2" mb="8px" fontStyle="bold" fontSize="2xl">
+          <NextLink href={"/" + user + "/" + post.titleurl}>
+            {post.title}
+          </NextLink>
+        </Heading>
+      </Link>
       <Text fontSize="lg">{datePrettier(post.date)}</Text>
     </Box>
   );

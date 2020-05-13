@@ -1,5 +1,6 @@
 import App from "next/app";
 import { ThemeProvider, ColorModeProvider, CSSReset } from "@chakra-ui/core";
+import Head from "next/head";
 import theme from "../styles/theme";
 
 import "react-quill/dist/quill.bubble.css";
@@ -7,10 +8,15 @@ import "../styles/postcontent.css";
 
 function GhostApp({ Component, pageProps }) {
   return (
-    <ThemeProvider theme={theme}>
-      <CSSReset />
-      <Component {...pageProps} />
-    </ThemeProvider>
+    <>
+      <Head>
+        <link rel="icon" type="image/x-icon" href="/favicon.png" />
+      </Head>
+      <ThemeProvider theme={theme}>
+        <CSSReset />
+        <Component {...pageProps} />
+      </ThemeProvider>
+    </>
   );
 }
 

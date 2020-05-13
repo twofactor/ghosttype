@@ -40,10 +40,13 @@ export default function NewPost({ user, screenname }) {
     }
   });
 
+  const currenttime = Date.now();
+
   const postdata = {
     title: "",
-    date: "today",
+    date: currenttime,
     postContents: "",
+    published: false,
   };
 
   return (

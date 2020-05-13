@@ -12,6 +12,7 @@ import {
   Box,
   Divider,
   Link,
+  Avatar,
 } from "@chakra-ui/core";
 import { useColorMode } from "@chakra-ui/core";
 
@@ -34,8 +35,16 @@ export async function getServerSideProps(context) {
     };
   }
 
+  const postsSorted = posts
+    .filter((post) => {
+      return post.published;
+    })
+    .sort((A, B) => {
+      return A.date > B.date ? -1 : 1;
+    });
+
   return {
-    props: { posts: posts, user: user },
+    props: { posts: postsSorted, user: user },
   };
 }
 
@@ -62,12 +71,31 @@ export default function BlogPosts({ posts, user }) {
           </Box>
         </Flex>
         <Column>
-          <Box mt="100px" mb="36px">
-            <Heading mb="12px" fontSize="4xl">
-              {user.name}
-            </Heading>
-            <Text fontSize="lg">{user.description}</Text>
-          </Box>
+          <Flex align="row" mt="100px" mb="36px">
+            <Box>
+              <Heading mb="12px" fontSize="4xl">
+                {user.name}
+              </Heading>
+              <Text fontSize="lg" mb="8px">
+                {user.description}
+              </Text>
+              <a
+                target="_blank"
+                href={"http://twitter.com/" + user.screen_name}
+              >
+                <Button variant="outline" pl="8px" pr="12px">
+                  <Avatar
+                    size="xs"
+                    name={user.name}
+                    src={user.profile_image_url}
+                  />
+                  <Text fontSize="lg" ml="8px">
+                    Twitter
+                  </Text>
+                </Button>
+              </a>
+            </Box>
+          </Flex>
         </Column>
         <Divider />
         <Column>

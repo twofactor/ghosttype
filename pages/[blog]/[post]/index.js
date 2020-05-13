@@ -8,6 +8,7 @@ import { Container } from "../../../components/container";
 import { Column } from "../../../components/column";
 import SignInButton from "../../../components/admin/signInButton";
 import NoPost from "../../../components/blog/nopost";
+import { datePrettier } from "../../../lib/dateprettier";
 
 export async function getServerSideProps(context) {
   let { blog, post } = context.params;
@@ -57,7 +58,7 @@ export default function BlogPost({ postdata }) {
           {postdata.title}
         </Heading>
         <Text fontSize="lg" mb="12px">
-          {postdata.date}
+          {datePrettier(postdata.date)}
         </Text>
         <Divider mb="28px" />
         <div

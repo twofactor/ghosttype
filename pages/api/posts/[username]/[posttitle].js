@@ -19,13 +19,11 @@ export default auth0.requireAuthentication(async (req, res) => {
   const { user } = await auth0.getSession(req);
   const userid = await user.sub;
 
-  //check to make sure its the right user
-
   //big disgusting code block that attempts to handle the requests
   //will clean up later
   try {
     //throw out bad methods
-    if (req.method !== "POST") {
+    if (req.method !== "POST" && req.method !== "DELETE") {
       throw error("WRONG METHOD");
     } else {
       const {
@@ -39,9 +37,21 @@ export default auth0.requireAuthentication(async (req, res) => {
         console.log("bad bad bad");
         throw "WRONG USER";
       }
+      if (req.method === "DELETE") {
+        console.log("okay deleting the post");
 
-      //start processing the request
-      if (body.post_contents) {
+        const ref = await client.query(
+          q.Get(q.Match(q.Index("findpost"), [username, posttitle]))
+        );
+
+        if (!ref) {
+          throw "NO DOC FOUND";
+        }
+
+        const deleteSuccessful = await client.query(q.Delete(ref.ref));
+
+        res.status(200).json(deleteSuccessful);
+      } else if (body.post_contents) {
         const ref = await client.query(
           q.Get(q.Match(q.Index("findpost"), [username, posttitle]))
         );
@@ -66,37 +76,48 @@ export default auth0.requireAuthentication(async (req, res) => {
           throw error("NO DOC FOUND");
         }
 
-        //clean title url to be saved
-        let cleanTitle = cleanUrl(body.post_title);
-
-        //check for title collisions (awful code)
-        try {
-          const checkTitleCollision = await client.query(
-            q.Get(q.Match(q.Index("findpost"), [username, cleanTitle]))
+        //update title
+        if (body.ispublished) {
+          const updatedContent = await client.query(
+            q.Update(ref.ref, {
+              data: {
+                title: body.post_title,
+              },
+            })
           );
 
-          if (checkTitleCollision) {
-            cleanTitle = cleanTitle + "-2";
+          const newdata = await updatedContent.data;
+          res.status(200).json(newdata);
+        } else {
+          let cleanTitle = cleanUrl(body.post_title);
+
+          //check for title collisions (awful code)
+          try {
+            const checkTitleCollision = await client.query(
+              q.Get(q.Match(q.Index("findpost"), [username, cleanTitle]))
+            );
+
+            if (checkTitleCollision) {
+              cleanTitle = cleanTitle + "-2";
+            }
+          } catch (e) {
+            //do nothing
+            console.log("no title collision found");
           }
-        } catch (e) {
-          //do nothing
-          console.log("no title collision found");
+
+          const updatedContent = await client.query(
+            q.Update(ref.ref, {
+              data: {
+                title: body.post_title,
+                titleurl: cleanTitle,
+                date: Date.now(),
+              },
+            })
+          );
+
+          const newdata = await updatedContent.data;
+          res.status(200).json(newdata);
         }
-
-        //update title
-        const updatedContent = await client.query(
-          q.Update(ref.ref, {
-            data: {
-              title: body.post_title,
-              titleurl: cleanTitle,
-              date: Date.now(),
-            },
-          })
-        );
-
-        const newdata = await updatedContent.data;
-
-        res.status(200).json(newdata);
       } else if (body.post_title && body.new) {
         //generate new post
         console.log("new post time");
@@ -127,18 +148,39 @@ export default auth0.requireAuthentication(async (req, res) => {
               title: body.post_title,
               titleurl: cleanTitle,
               date: Date.now(),
+              published: false,
               postContents: "",
             },
           })
         );
 
         res.status(200).json(ref.data);
+      } else if (body.changepublish) {
+        console.log("ugh flipping publish");
+
+        const flippedState = !body.ispublished;
+
+        const ref = await client.query(
+          q.Get(q.Match(q.Index("findpost"), [username, posttitle]))
+        );
+
+        if (!ref) {
+          throw "NO DOC FOUND";
+        }
+
+        const updatedContent = await client.query(
+          q.Update(ref.ref, {
+            data: { published: flippedState },
+          })
+        );
+
+        res.status(200).json({ flippublishstatus: "Good" });
       } else {
         res.status(500).json({ error: "BAD REQUEST" });
       }
     }
   } catch (e) {
-    console.log(e);
+    console.log("error" + e);
     res.status(500).json({ error: e.message });
   }
 });

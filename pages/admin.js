@@ -21,6 +21,7 @@ import { Container } from "../components/container";
 import { Column } from "../components/column";
 import SignInButton from "../components/admin/signInButton";
 import AdminPostPreview from "../components/admin/adminPostPreview";
+import { datePrettier } from "../lib/dateprettier";
 import { useEffect } from "react";
 
 export async function getServerSideProps(context) {
@@ -58,9 +59,6 @@ export async function getServerSideProps(context) {
   const postsSorted = posts.sort((A, B) => {
     return A.date > B.date ? -1 : 1;
   });
-
-  console.log(postsSorted[0].date);
-
   return {
     props: { user: user.user, posts: postsSorted, screenname: screenname },
   };
@@ -99,6 +97,11 @@ export default function Home({ user, posts }) {
                   <Text fontSize="md">Create Post</Text>
                 </Button>
               </Link>
+              <a target="_blank" href={"/" + user.screenname + "/"}>
+                <Button variant="outline" size="md" ml="12px">
+                  <Text fontSize="md">View My Blog</Text>
+                </Button>
+              </a>
               <Link href="/api/logout">
                 <Button variant="outline" size="md" ml="12px">
                   <Text fontSize="md">Log Out</Text>
@@ -116,6 +119,7 @@ export default function Home({ user, posts }) {
                 key={post.date + user.screenname + post.title}
                 post={post}
                 user={user.screenname}
+                published={post.published}
               />
             ))
           ) : (

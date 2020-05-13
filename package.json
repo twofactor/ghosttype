@@ -12,6 +12,7 @@
     "@chakra-ui/core": "^0.7.0",
     "@emotion/core": "^10.0.28",
     "@emotion/styled": "^10.0.27",
+    "datejs": "^1.0.0-rc3",
     "emotion-theming": "^10.0.27",
     "faunadb": "^2.14.0",
     "isomorphic-unfetch": "^3.0.0",

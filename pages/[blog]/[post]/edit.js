@@ -12,14 +12,14 @@ export async function getServerSideProps(context) {
   const postdata = await retrievePostByUserAndTitle(blog, post);
 
   return {
-    props: { postdata },
+    props: { postdata, blog, post },
   };
 }
 
-export default function EditPost({ postdata }) {
+export default function EditPost({ postdata, blog, post }) {
   return (
     <>
-      <DynamicEditor postdata={postdata} />
+      <DynamicEditor postdata={postdata} username={blog} post={post} />
     </>
   );
 }

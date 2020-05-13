@@ -25,7 +25,7 @@ export default function SignInButton() {
     );
   } else {
     return (
-      <NextLink href="admin">
+      <NextLink href="/admin">
         <Button pl="6px" pr="6px" variant="outline" size="sm">
           <Avatar size="xs" mr="8px" name={data.name} src={data.picture} />
           <Text fontSize="sm">{data.nickname}</Text>

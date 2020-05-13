@@ -60,23 +60,27 @@ export default function Home() {
             newsletters, which feel too ephemeral and not timeless the way blog
             posts are.
           </Text>
-          <Text fontSize="lg" mb="36px">
+          <Text fontSize="lg" mb="24px">
             You can check out some example blogs if you'd like as well. If you
-            want me to feature yours, just dm me on twitter{" "}
+            want me to feature yours, just dm me on twitter
             <Link target="_blank" href="https://twitter.com/ghosttyped">
               @ghosttyped
             </Link>
             .
           </Text>
-          <Link>
-            <Heading as="h2" mb="8px" fontStyle="bold" fontSize="2xl">
-              <NextLink href="/ghosttyped">@Ghosttyped's Blog</NextLink>
-            </Heading>
-          </Link>
-          <Text fontSize="lg">
-            David's personal blog, set up right here on this site!
-          </Text>
-          <Box height="40px" />
+          <Box padding="16px" borderWidth="1px">
+            <Link>
+              <Heading as="h2" mb="8px" fontStyle="bold" fontSize="2xl">
+                <NextLink href="/ghosttyped">
+                  <a>@Ghosttyped's Blog</a>
+                </NextLink>
+              </Heading>
+            </Link>
+            <Text fontSize="lg">
+              David's personal blog, set up right here on this site!
+            </Text>
+          </Box>
+          <Box height="32px" />
           <Text fontSize="lg" fontWeight="bold">
             Are there more features coming soon?
           </Text>
@@ -94,6 +98,23 @@ export default function Home() {
             where I can't afford to keep it up I'll have to charge or something.
             If you'd like to donate database/cloud credits to me let me know as
             well!
+          </Text>
+          <Text fontSize="lg" fontWeight="bold">
+            Is there any relationship to Ghost?
+          </Text>
+          <Text fontSize="lg" mb="12px">
+            No lmao. No relation at all. I named this app after my twitter
+            handle, which has been historically either "ghosttype" with some
+            form of underscore or "ghosttyped." The name is a bit inconvienent
+            but I'm not going to change my domain because I found out that
+            something else exists especially since I'm broke right now.
+          </Text>
+          <Text fontSize="lg" fontWeight="bold">
+            Broke?
+          </Text>
+          <Text fontSize="lg" mb="12px">
+            If you wanna help fix that, I'm avaliable for hire if you're looking
+            for a software engineer in San Francisco.
           </Text>
           <Box height="200px" />
         </Column>

@@ -1,4 +1,11 @@
 import Head from "next/head";
+import Router from "next/router";
+import {
+  retrieveUserByUserID,
+  retrievePostsByUser,
+  createNewUser,
+} from "../lib/faunadb";
+import auth0 from "../lib/auth0";
 
 import {
   Button,
@@ -13,8 +20,59 @@ import {
 import { Container } from "../components/container";
 import { Column } from "../components/column";
 import SignInButton from "../components/admin/signInButton";
+import AdminPostPreview from "../components/admin/adminPostPreview";
+import { useEffect } from "react";
 
-export default function Home() {
+export async function getServerSideProps(context) {
+  const user = await auth0.getSession(context.req);
+
+  if (!user) {
+    return {
+      props: {
+        user: "",
+      },
+    };
+  }
+
+  //ugh this is gross
+  const userName = await retrieveUserByUserID(user.user.sub);
+
+  let userHolder = userName;
+
+  if (!userName) {
+    const newUser = await createNewUser(user.user.sub);
+    userHolder = newUser;
+  }
+
+  const screenname = userHolder.screen_name;
+  const posts = await retrievePostsByUser(screenname);
+
+  user.user.screenname = screenname;
+
+  if (user && screenname && !posts[0]) {
+    return {
+      props: { user: user.user, posts: null, screenname: screenname },
+    };
+  }
+
+  const postsSorted = posts.sort((A, B) => {
+    return A.date > B.date ? -1 : 1;
+  });
+
+  console.log(postsSorted[0].date);
+
+  return {
+    props: { user: user.user, posts: postsSorted, screenname: screenname },
+  };
+}
+
+export default function Home({ user, posts }) {
+  useEffect(() => {
+    if (user === "") {
+      Router.push("/");
+    }
+  });
+
   return (
     <>
       <Container>
@@ -28,25 +86,55 @@ export default function Home() {
         <Column>
           <Box mt="100px" mb="24px">
             <Heading mb="12px" fontSize="4xl">
-              Welcome to your admin panel
+              Welcome, {user.nickname}
             </Heading>
             <Text fontSize="lg" mb="24px">
-              This is where you'll be able to see your articles and write them.
-              Unfortunately I haven't built this part yet. You can logout at
-              least though!
+              Here you can see all the posts you've written. You can click on
+              one to edit it too! You can also log out of your account. Very
+              cool.
             </Text>
-            <Link href="/api/logout">
-              <Button variant="outline" size="md" mb="12px">
-                <Text fontSize="md">Log Out</Text>
-              </Button>
-            </Link>
+            <Box>
+              <Link href="/newpost">
+                <Button size="md" variant="outline">
+                  <Text fontSize="md">Create Post</Text>
+                </Button>
+              </Link>
+              <Link href="/api/logout">
+                <Button variant="outline" size="md" ml="12px">
+                  <Text fontSize="md">Log Out</Text>
+                </Button>
+              </Link>
+            </Box>
           </Box>
         </Column>
         <Divider />
         <Column>
-          <Text mt="36px" fontSize="lg">
-            Coming soon lmao
-          </Text>
+          <Box pt="24px" />
+          {posts ? (
+            posts.map((post) => (
+              <AdminPostPreview
+                key={post.date + user.screenname + post.title}
+                post={post}
+                user={user.screenname}
+              />
+            ))
+          ) : (
+            <Box>
+              <Link>
+                <Heading as="h2" mb="8px" fontStyle="bold" fontSize="2xl">
+                  You have no posts yet!
+                </Heading>
+              </Link>
+              <Text fontSize="lg" mb="12px">
+                Why not write something beautiful for all the world to see :)
+              </Text>
+              <Link href="/newpost">
+                <Button size="md" variant="outline">
+                  <Text fontSize="md">Create Post</Text>
+                </Button>
+              </Link>
+            </Box>
+          )}
           <Box height="200px" />
         </Column>
       </Container>

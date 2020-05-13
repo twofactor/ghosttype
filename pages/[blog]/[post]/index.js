@@ -64,6 +64,7 @@ export default function BlogPost({ postdata }) {
           className="blogpostcontents"
           dangerouslySetInnerHTML={{ __html: postdata.postContents }}
         />
+        <Box height="48px" />
       </Column>
     </Container>
   );

@@ -9,9 +9,7 @@ function GhostApp({ Component, pageProps }) {
   return (
     <ThemeProvider theme={theme}>
       <CSSReset />
-      <ColorModeProvider>
-        <Component {...pageProps} />
-      </ColorModeProvider>
+      <Component {...pageProps} />
     </ThemeProvider>
   );
 }

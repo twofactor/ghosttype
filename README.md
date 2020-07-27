@@ -1,3 +1,7 @@
+# BlogMachine - a minimalist blogging app
+
+If you're reading the code just a warning - it is not very good. The origina project was made in a few days and I've been slowly adding features and cleaining it up as I go but it is not very good right now. 
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/zeit/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started

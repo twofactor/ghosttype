@@ -149,7 +149,7 @@ export default function Home() {
               <Avatar
                 size="xs"
                 name="ghosttyped"
-                src="https://pbs.twimg.com/profile_images/1254546118731390978/vC_IGyQe_normal.jpg"
+                src="https://pbs.twimg.com/profile_images/1284733818847391744/IlYYJdKr_normal.jpg"
               />
               <Text fontSize="lg" ml="8px">
                 Follow David On Twitter

@@ -4,10 +4,10 @@ import NextLink from "next/link";
 import { retrievePostByUserAndTitle } from "../../../lib/faunadb";
 import { Button, Heading, Text, Flex, Box, Divider } from "@chakra-ui/core";
 
-import { Container } from "../../../components/container";
-import { Column } from "../../../components/column";
-import SignInButton from "../../../components/admin/signInButton";
-import NoPost from "../../../components/blog/nopost";
+import { Container } from "../../../components/layout/container";
+import { Column } from "../../../components/layout/column";
+import SignInButton from "../../../modules/admin/signInButton";
+import NoPost from "../../../modules/blog/nopost";
 import { datePrettier } from "../../../lib/dateprettier";
 
 export async function getServerSideProps(context) {
@@ -65,7 +65,27 @@ export default function BlogPost({ postdata }) {
         </Box>
       </Flex>
       <Column>
-        <Heading mt="100px" mb="4px" fontSize="4xl">
+        {!postdata.published && (
+          <Box
+            padding="16px"
+            mt="48px"
+            borderRadius="12px"
+            border="1px solid"
+            borderLeft="8px solid"
+            borderColor="green.100"
+            backgroundColor="green.50"
+          >
+            <Heading size="lg" mb="4px">
+              This is a preview of a draft post
+            </Heading>
+            <Text color="green.900">
+              This post is not quite public right now. It is, however, avalaible
+              from this hidden but sharable link.
+            </Text>
+          </Box>
+        )}
+
+        <Heading mt="48px" mb="4px" fontSize="4xl">
           {postdata.title}
         </Heading>
         <Text fontSize="lg" mb="12px">

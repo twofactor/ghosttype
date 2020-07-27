@@ -10,10 +10,9 @@ import {
   retrieveUserByUserID,
 } from "../../../lib/faunadb";
 
-const DynamicEditor = dynamic(
-  () => import("../../../components/editor/editor"),
-  { ssr: false }
-);
+const DynamicEditor = dynamic(() => import("../../../modules/editor/editor"), {
+  ssr: false,
+});
 
 export async function getServerSideProps(context) {
   let { blog, post } = context.params;

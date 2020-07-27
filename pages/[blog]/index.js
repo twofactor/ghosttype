@@ -16,12 +16,12 @@ import {
 } from "@chakra-ui/core";
 import { useColorMode } from "@chakra-ui/core";
 
-import { Container } from "../../components/container";
-import { Column } from "../../components/column";
-import SignInButton from "../../components/admin/signInButton";
-import NoPost from "../../components/blog/nopost";
+import { Container } from "../../components/layout/container";
+import { Column } from "../../components/layout/column";
+import SignInButton from "../../modules/admin/signInButton";
+import NoPost from "../../modules/blog/nopost";
 
-import BlogPostPreview from "../../components/blog/blogPostPreview";
+import BlogPostPreview from "../../modules/blog/blogPostPreview";
 
 export async function getServerSideProps(context) {
   const { blog } = context.params;

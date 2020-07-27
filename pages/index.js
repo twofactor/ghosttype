@@ -12,9 +12,10 @@ import {
   Avatar,
 } from "@chakra-ui/core";
 
-import { Container } from "../components/container";
-import { Column } from "../components/column";
-import SignInButton from "../components/admin/signInButton";
+import { Notice } from "../components/ui/notice";
+import { Container } from "../components/layout/container";
+import { Column } from "../components/layout/column";
+import SignInButton from "../modules/admin/signInButton";
 
 import { useColorMode } from "@chakra-ui/core";
 
@@ -24,7 +25,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Ghosttype: A Minimalist Blogging Platform</title>
+        <title>BlogMachine: A Minimalist Blogging Platform</title>
         <meta property="og:title" content="Ghosttype" />
         <meta
           property="og:description"
@@ -48,8 +49,9 @@ export default function Home() {
           </Box>
         </Flex>
         <Column>
-          <Heading mt="100px" mb="4px" fontSize="4xl">
-            Ghosttype is a minimalist blogging platform
+          <Notice />
+          <Heading mt="64px" mb="4px" fontSize="4xl">
+            Blog Machine is a minimalist blogging platform
           </Heading>
           <Text fontSize="lg" mb="12px">
             Create a minimal, barebones style blog in seconds. You know, like
@@ -79,7 +81,7 @@ export default function Home() {
             <Link>
               <Heading as="h2" mb="8px" fontStyle="bold" fontSize="2xl">
                 <NextLink href="/ghosttyped">
-                  <a>@Ghosttyped's Blog</a>
+                  <a>@ghosttyped's Blog</a>
                 </NextLink>
               </Heading>
             </Link>

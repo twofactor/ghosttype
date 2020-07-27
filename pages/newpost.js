@@ -6,7 +6,7 @@ import dynamic from "next/dynamic";
 
 import { useEffect } from "react";
 
-const DynamicEditor = dynamic(() => import("../components/editor/editor"), {
+const DynamicEditor = dynamic(() => import("../modules/editor/editor"), {
   ssr: false,
 });
 
@@ -45,7 +45,6 @@ export default function NewPost({ user, screenname }) {
   const postdata = {
     title: "",
     date: currenttime,
-    postContents: "",
     published: false,
   };
 

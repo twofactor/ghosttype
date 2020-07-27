@@ -17,10 +17,13 @@ import {
   Link,
 } from "@chakra-ui/core";
 
-import { Container } from "../components/container";
-import { Column } from "../components/column";
-import SignInButton from "../components/admin/signInButton";
-import AdminPostPreview from "../components/admin/adminPostPreview";
+import { Container } from "../components/layout/container";
+import { Column } from "../components/layout/column";
+
+import { Notice } from "../components/ui/notice";
+
+import SignInButton from "../modules/admin/signInButton";
+import AdminPostPreview from "../modules/admin/adminPostPreview";
 import { datePrettier } from "../lib/dateprettier";
 import { useEffect } from "react";
 
@@ -98,7 +101,9 @@ export default function Home({ user, posts }) {
           </Box>
         </Flex>
         <Column>
-          <Box mt="100px" mb="24px">
+          <Box height="16px"></Box>
+          <Notice />
+          <Box mt="64px" mb="24px">
             <Heading mb="12px" fontSize="4xl">
               Welcome, {user.nickname}
             </Heading>

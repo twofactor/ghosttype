@@ -27,22 +27,29 @@ import {
   useDisclosure,
 } from "@chakra-ui/core";
 import { useToast } from "@chakra-ui/core";
-import { useHotkeys } from "react-hotkeys-hook";
 import useThrottledEffect from "use-throttled-effect";
 import _ from "lodash";
 
 import ReactQuill, { Quill } from "react-quill";
 import MarkdownShortcuts from "quill-markdown-shortcuts";
 
-import { Container } from "../container";
-import { Column } from "../column";
-import SignInButton from "../admin/signInButton";
+import { Container } from "../../components/layout/container";
+import { Column } from "../../components/layout/column";
 import { datePrettier } from "../../lib/dateprettier";
 
 Quill.register("modules/markdownShortcuts", MarkdownShortcuts);
 
 const modules = {
   markdownShortcuts: {},
+};
+
+//hack fake component that enables using the components own props
+const EditorOnLoadHack = ({ onRequestEdit }) => {
+  useEffect(() => {
+    console.log("ayy lmao");
+    onRequestEdit();
+  }, []);
+  return <></>;
 };
 
 const Editor = ({ postdata, username, post }) => {
@@ -124,7 +131,7 @@ const Editor = ({ postdata, username, post }) => {
 
   useEffect(() => {
     titleRef.current.focus();
-    console.log(titleRef.current);
+    console.log("title ref", titleRef.current);
   }, []);
 
   const updateTitle = async (e) => {
@@ -204,12 +211,8 @@ const Editor = ({ postdata, username, post }) => {
           }
         }
 
-        setTimeout(() => {
-          editorRef.current.getEditor().focus();
-        }, 1);
+        editorRef.current.getEditor().focus();
       } catch (e) {
-        console.log("error?");
-        console.log(e);
         toast({
           title: `Network Error`,
           status: "error",
@@ -233,8 +236,6 @@ const Editor = ({ postdata, username, post }) => {
   };
 
   const saveAndGoBack = () => {
-    console.log("save");
-    console.log(contents);
     updateData();
     Router.push("/admin");
   };
@@ -322,8 +323,19 @@ const Editor = ({ postdata, username, post }) => {
             onSubmit={updateTitle}
             ref={titleRef}
           >
-            <EditablePreview fontSize="4xl" fontWeight="bold" />
-            <EditableInput fontSize="4xl" fontWeight="bold" />
+            {(props) => {
+              useEffect(() => props.onRequestEdit(), []);
+
+              return (
+                <>
+                  <EditablePreview fontSize="4xl" fontWeight="bold" />
+                  <EditableInput fontSize="4xl" fontWeight="bold" />
+                  {/* {!postdata.title && (
+                    <EditorOnLoadHack onRequestEdit={props.onRequestEdit} />
+                  )} */}
+                </>
+              );
+            }}
           </Editable>
           <Flex algin="row" justify="left">
             <Text fontSize="lg" mb="12px">

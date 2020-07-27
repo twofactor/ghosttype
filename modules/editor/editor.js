@@ -55,6 +55,7 @@ const EditorOnLoadHack = ({ onRequestEdit }) => {
 const Editor = ({ postdata, username, post }) => {
   const [contents, setContents] = useState(postdata.postContents);
   const [titleurl, setTitleurl] = useState(post);
+  const [title, setTitle] = useState(postdata.title);
   const [ispublished, setIspublished] = useState(postdata.published);
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -122,8 +123,10 @@ const Editor = ({ postdata, username, post }) => {
 
   useThrottledEffect(
     () => {
-      updateData();
-      console.log(contents);
+      if (titleurl !== "") {
+        updateData();
+        console.log(contents);
+      }
     },
     30000,
     [contents]
@@ -135,6 +138,8 @@ const Editor = ({ postdata, username, post }) => {
   }, []);
 
   const updateTitle = async (e) => {
+    editorRef.current.getEditor().focus();
+
     //update existing title
     if (e !== "") {
       try {
@@ -158,15 +163,16 @@ const Editor = ({ postdata, username, post }) => {
           if (updateTitleData.titleurl !== titleurl) {
             console.log("new title!");
             setTitleurl(updateTitleData.titleurl);
+            setTitle(e);
           }
 
           if (!updateTitleData.error) {
-            toast({
-              title: "Saved Title",
-              status: "info",
-              duration: 500,
-              isClosable: false,
-            });
+            // toast({
+            //   title: "Saved Title",
+            //   status: "info",
+            //   duration: 500,
+            //   isClosable: false,
+            // });
           } else {
             toast({
               title: "Error",
@@ -195,12 +201,12 @@ const Editor = ({ postdata, username, post }) => {
 
           if (!newPostData.error) {
             setTitleurl(newPostData.titleurl);
-            toast({
-              title: `Created New Post ${newPostData.title}`,
-              status: "info",
-              duration: 500,
-              isClosable: false,
-            });
+            // toast({
+            //   title: `Created New Post ${newPostData.title}`,
+            //   status: "info",
+            //   duration: 500,
+            //   isClosable: false,
+            // });
           } else {
             toast({
               title: `BAD BAD BAD`,
@@ -210,8 +216,6 @@ const Editor = ({ postdata, username, post }) => {
             });
           }
         }
-
-        editorRef.current.getEditor().focus();
       } catch (e) {
         toast({
           title: `Network Error`,

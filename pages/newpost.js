@@ -45,6 +45,7 @@ export default function NewPost({ user, screenname }) {
   const postdata = {
     title: "",
     date: currenttime,
+    postContents: "",
     published: false,
   };
 
